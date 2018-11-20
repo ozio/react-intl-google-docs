@@ -8,13 +8,13 @@ Utility to fetch translations from Google Docs and store it in React Intl-compat
 
 ### Step 2: Get `credentials.json`:
 
-You can download it from [Google API Console](https://console.developers.google.com/apis/library) by creating new project. When you got it - put it in `/`.
+You can download it from [Google API Console](https://console.developers.google.com/apis/library) by creating new project. When you got it - put it in project root.
 
 ### Step 3: Generate `token.json`:
 
 To generate it, run `npm run generate-token` and answer all the questions.
 
-## Step 4: Create spreadsheet in Google Docs with following structure:
+### Step 4: Create spreadsheet in Google Docs with following structure:
 
 | Link | Russian | English | Spanish | French | Chinese |
 |------|---------|---------|---------|--------|---------|
