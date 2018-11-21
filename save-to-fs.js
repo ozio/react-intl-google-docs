@@ -2,6 +2,10 @@ const path = require('path');
 const fs = require('fs');
 const fsPromises = fs.promises;
 
+require('dotenv').config();
+
+const { FILE_MASK } = process.env;
+
 module.exports = (folderPath, data) => {
   const absoluteFolderPath = path.resolve(folderPath);
 
@@ -19,7 +23,7 @@ module.exports = (folderPath, data) => {
 
   console.log('Creating translation files ...');
   Object.keys(data).forEach((key) => {
-    const filename = `${key}.json`;
+    const filename = FILE_MASK.replace('{lang}', key);
     const absolutePath = `${absoluteFolderPath}/${filename}`;
 
     console.log(`Creating ${folderPath}/${filename} ...`);

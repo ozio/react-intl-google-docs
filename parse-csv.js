@@ -1,13 +1,5 @@
 const csv = require('csv');
 
-const langs = {
-  French: 'fr',
-  Spanish: 'es',
-  Chinese: 'zh',
-  English: 'en',
-  Russian: 'ru',
-};
-
 module.exports = (data) => {
   console.log('Parsing spreadsheet data ...');
   const handler = (resolve, reject) => {
@@ -21,14 +13,6 @@ module.exports = (data) => {
         return reject(err);
       }
 
-      const langs = {
-        French: 'fr',
-        Spanish: 'es',
-        Chinese: 'zh',
-        English: 'en',
-        Russian: 'ru',
-      };
-
       const library = {};
 
       rows.forEach((row) => {
@@ -40,13 +24,11 @@ module.exports = (data) => {
           } else {
             if (link === '') return;
 
-            const lang = langs[key];
-
-            if (!library[lang]) library[lang] = {};
+            if (!library[key]) library[key] = {};
 
             if (row[key] === '') return;
 
-            library[lang][link] = row[key];
+            library[key][link] = row[key];
           }
         });
       });

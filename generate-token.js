@@ -10,7 +10,7 @@ const TOKEN_PATH = 'token.json';
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Google Sheets API.
-  authorize(JSON.parse(content), listMajors);
+  authorize(JSON.parse(content), checkAuth);
 });
 
 /**
@@ -69,13 +69,17 @@ function getNewToken(oAuth2Client, callback) {
  * @see https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
-function listMajors(auth) {
+function checkAuth(auth) {
   const sheets = google.sheets({ version: 'v4', auth });
+  console.log('Check authentication ...');
   sheets.spreadsheets.values.get({
     spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
     range: 'Class Data!A2:E',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
+
+    console.log('Everything is working! Sample data:');
+    console.log('===================');
     const rows = res.data.values;
     if (rows.length) {
       console.log('Name, Major:');
@@ -86,5 +90,6 @@ function listMajors(auth) {
     } else {
       console.log('No data found.');
     }
+    console.log('===================');
   });
 }
